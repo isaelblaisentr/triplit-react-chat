@@ -10,12 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@heroicons/react": "^2.1.4",
     "@material-tailwind/react": "^2.1.9",
     "@triplit/client": "^0.3.63",
     "@triplit/react": "^0.3.66",
     "luxon": "^3.4.4",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.24.0"
   },
   "devDependencies": {
     "@triplit/cli": "^0.4.3",
