@@ -18,20 +18,15 @@ export const schema = {
       created_at: S.Date({ default: S.Default.now() }),
     }),
   },
-  user_conversation: {
-    schema: S.Schema({
-      id: S.Id(),
-      user_id: S.String(),
-      user: S.RelationById('users', '$user_id'),
-      conversation_id: S.String(),
-      conversation: S.RelationById('conversations', '$conversation_id'),
-    }),
-  },
   conversations: {
     schema: S.Schema({
       id: S.Id(),
       title: S.String(),
       created_at: S.Date({ default: S.Default.now() }),
+      user_ids: S.Set(S.String()),
+      users: S.RelationMany('users', {
+        where: [['id', 'in', '$user_ids']],
+      }),
     }),
   },
   messages: {
