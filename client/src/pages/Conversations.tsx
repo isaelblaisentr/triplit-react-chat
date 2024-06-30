@@ -9,6 +9,8 @@ import Table from '../components/Table.tsx';
 import { DateTime } from 'luxon';
 import useConversations from '../hooks/useConversations.tsx';
 
+import ConversationForm from '../components/conversations/conversationForm.tsx';
+
 function Conversations() {
   const columnHeaders = ['id', 'title', '-'];
   const { conversations } = useConversations();
@@ -37,6 +39,7 @@ function Conversations() {
         </Typography>
       </CardHeader>
       <CardBody className="text-center">
+        <ConversationForm />
         <Table columnHeaders={columnHeaders} rows={conversationList} />
       </CardBody>
     </Card>
