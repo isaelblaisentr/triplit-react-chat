@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import Table from '../components/Table.tsx';
 import useConversations from '../hooks/useConversations.tsx';
 
-import ConversationForm from '../components/conversations/conversationForm.tsx';
+import ConversationForm from '../components/conversations/ConversationForm.tsx';
 import { UserColumnHeaders } from '../constants/columnHeaders.ts';
 
 function Conversations() {
