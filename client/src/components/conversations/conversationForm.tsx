@@ -7,7 +7,7 @@ import useUsers from '../../hooks/useUsers.tsx';
 
 type Inputs = {
   title: string;
-  users: Array<string>;
+  user_ids: Array<string>;
 };
 
 export default function ConversationForm() {
@@ -23,15 +23,13 @@ export default function ConversationForm() {
     }
   }, [users]);
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<Inputs>();
+  const { register, handleSubmit } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     console.log('Conversation Form submit values: ', data);
-    await triplit.insert('conversations', { title: data.title });
+    await triplit.insert('conversations', {
+      title: data.title,
+      user_ids: new Set<string>(data.user_ids),
+    });
   };
 
   return (
@@ -52,9 +50,9 @@ export default function ConversationForm() {
           {...register('title')}
         />
         <Typography variant="h6" color="blue-gray" className="-mb-3">
-          User Id
+          Users
         </Typography>
-        <CheckboxList name="users" register={register} list={userList} />
+        <CheckboxList name="user_ids" register={register} list={userList} />
       </div>
       <Button type="submit" className="mt-6" fullWidth>
         Create
