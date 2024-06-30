@@ -6,13 +6,13 @@ import {
 } from '@material-tailwind/react';
 import { useEffect, useState } from 'react';
 import Table from '../components/Table.tsx';
-import { DateTime } from 'luxon';
 import useConversations from '../hooks/useConversations.tsx';
 
 import ConversationForm from '../components/conversations/conversationForm.tsx';
+import { UserColumnHeaders } from '../constants/columnHeaders.ts';
 
 function Conversations() {
-  const columnHeaders = ['id', 'title', '-'];
+  const columnHeaders = ['id', 'title', 'usersNb', '-'];
   const { conversations } = useConversations();
   const [conversationList, setConversationList] = useState([]);
   useEffect(() => {
@@ -22,9 +22,7 @@ function Conversations() {
         conversations,
         ([, conversation]) => ({
           ...conversation,
-          created_at: DateTime.fromJSDate(conversation.created_at).toFormat(
-            'yyyy-LL-dd HH:mm'
-          ),
+          usersNb: conversation.users.size ?? 0,
         })
       );
       setConversationList(conversationsMap);
@@ -40,7 +38,13 @@ function Conversations() {
       </CardHeader>
       <CardBody className="text-center">
         <ConversationForm />
-        <Table columnHeaders={columnHeaders} rows={conversationList} />
+        <Table
+          columnHeaders={columnHeaders}
+          rows={conversationList}
+          isNested
+          nestedColumnHeaders={UserColumnHeaders}
+          nestedProperty={'users'}
+        />
       </CardBody>
     </Card>
   );

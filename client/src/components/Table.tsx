@@ -1,12 +1,20 @@
+import React from 'react';
 import { Typography } from '@material-tailwind/react';
 import TableRow from './TableRow.tsx';
+import TableNestedRow from './TableNestedRow.tsx';
 
 export default function Table({
   columnHeaders,
   rows,
+  isNested,
+  nestedColumnHeaders,
+  nestedProperty,
 }: {
   columnHeaders: Array<string>;
   rows: Array<any>;
+  isNested?: boolean;
+  nestedColumnHeaders?: Array<any>;
+  nestedProperty?: string;
 }) {
   return (
     <div className="shadow-md sm:rounded-lg p-15">
@@ -35,13 +43,23 @@ export default function Table({
             const classes = isLast ? 'p-4' : 'p-4 border-b border-blue-gray-50';
 
             return (
-              <TableRow
-                key={index}
-                rowId={row.id}
-                row={row}
-                columnHeaders={columnHeaders}
-                classes={classes}
-              />
+              <React.Fragment key={row.id}>
+                <TableRow
+                  key={index}
+                  rowId={row.id}
+                  row={row}
+                  columnHeaders={columnHeaders}
+                  classes={classes}
+                />
+                {isNested && (
+                  <TableNestedRow
+                    key={`nested-${index}`}
+                    rowId={`nested-${row.id}`}
+                    rows={row[nestedProperty]}
+                    columnHeaders={nestedColumnHeaders}
+                  />
+                )}
+              </React.Fragment>
             );
           })}
         </tbody>

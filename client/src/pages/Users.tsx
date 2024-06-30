@@ -7,27 +7,14 @@ import {
 import useUsers from '../hooks/useUsers.tsx';
 import { useEffect, useState } from 'react';
 import Table from '../components/Table.tsx';
-import { DateTime } from 'luxon';
+import { UserColumnHeaders } from '../constants/columnHeaders.ts';
 
 function Users() {
-  const columnHeaders = [
-    'id',
-    'email',
-    'firstName',
-    'lastName',
-    'created_at',
-    '-',
-  ];
   const { users } = useUsers();
   const [userList, setUserList] = useState([]);
   useEffect(() => {
     if (users) {
-      const usersMap = Array.from(users, ([, user]) => ({
-        ...user,
-        created_at: DateTime.fromJSDate(user.created_at).toFormat(
-          'yyyy-LL-dd HH:mm'
-        ),
-      }));
+      const usersMap = Array.from(users, ([, user]) => user);
       setUserList(usersMap);
     }
   }, [users]);
@@ -39,7 +26,7 @@ function Users() {
         </Typography>
       </CardHeader>
       <CardBody className="text-center">
-        <Table columnHeaders={columnHeaders} rows={userList} />
+        <Table columnHeaders={UserColumnHeaders} rows={userList} />
       </CardBody>
     </Card>
   );

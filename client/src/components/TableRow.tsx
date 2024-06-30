@@ -1,5 +1,6 @@
 import { Typography } from '@material-tailwind/react';
 import React from 'react';
+import { DateTime } from 'luxon';
 /*import { Entity } from '@triplit/client';
 import { schema } from '../../triplit/schema.ts';
 type User = Entity<typeof schema, 'users'>;*/
@@ -26,7 +27,9 @@ export default function TableRow({
                 color="blue-gray"
                 className="font-normal"
               >
-                {row[head]}
+                {row[head] instanceof Date
+                  ? DateTime.fromJSDate(row[head]).toFormat('yyyy-LL-dd HH:mm')
+                  : row[head]}
               </Typography>
             </td>
           ) : (
