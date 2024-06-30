@@ -11,7 +11,8 @@ export default function useConversations(): {
 } {
   const conversationsQuery = triplit
     .query('conversations')
-    .order('created_at', 'DESC');
+    .order('created_at', 'DESC')
+    .include('users');
   const { results: conversations, error } = useQuery(
     triplit,
     conversationsQuery
