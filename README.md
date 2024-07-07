@@ -49,3 +49,12 @@ This is not really a chat app, but the schema and the data kinda represents it. 
    cd client
    npx triplit dev
    ```
+
+### Start Development Server
+> **Note:**
+> This has to be run during the development server is running. <br/>
+> Provide service token
+   ```sh
+   cd client
+   npx triplit seed run users-seeds
+   ```
