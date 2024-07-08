@@ -31,30 +31,51 @@ This is not really a chat app, but the schema and the data kinda represents it. 
 ### Installation
 > **Node Version:**
 > 21.4.0
-   ```sh
-   cd client
-   npm install
-   ```
+```sh
+cd client
+npm install
+```
 
 ### Start React Client
-   ```sh
-   cd client
-   npm run dev
-   ```
+```sh
+cd client
+npm run dev
+```
 
-### Start Development Server
-> **Note:**
+### Start Dev Server from client
 > Triplit Db schema is located in: `client/triplit`
-   ```sh
-   cd client
-   npx triplit dev
-   ```
+```sh
+cd client
+npx triplit dev
+```
 
-### Start Development Server
-> **Note:**
-> This has to be run during the development server is running. <br/>
-> Provide service token
-   ```sh
-   cd client
-   npx triplit seed run users-seeds
-   ```
+### Start Dev Server from server
+```sh
+cd server
+npm start
+```
+
+Once the server starts, you should have 2 tokens generated in the console
+```sh
+anonKey:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....
+serviceKey:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....
+```
+
+### Database manipulation
+If you want a fresh start, run
+> `--token` flag is the generated service token
+
+Fully clear the database 
+```sh
+npx triplit clear --full --token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....
+```
+
+Push the actual schema to the database
+```sh
+npx triplit schema push --token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....
+```
+
+Insert data from seed file users-seeds.ts
+```sh
+npx triplit seed run users-seeds --token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....
+```
