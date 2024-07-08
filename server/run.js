@@ -6,6 +6,7 @@ dotenv.config()
 
 console.log("PROJECT_ID: ", process.env.PROJECT_ID);
 console.log("JWT_SECRET: ", process.env.JWT_SECRET);
+console.log("LOCAL_DATABASE_URL: ", process.env.LOCAL_DATABASE_URL);
 
 const anonKey = jwt.sign(
     {
@@ -29,7 +30,7 @@ console.log("serviceKey: ", serviceKey)
 const port = +(process.env.PORT || 6543);
 
 const startServer = createServer({
-    //storage: 'sqlite',
+    storage: 'sqlite',
     verboseLogs: true,
 });
 
